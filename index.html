@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Scroll Test Demo
+	</title>
+	<link rel="stylesheet" type="text/css" href="bower_components/font_awesome/css/font-awesome.css">
+	<link rel="icon" href="res/favicon.ico"/>
+	<style>
+	body
+	{
+		margin:0 !important;
+		--main-primary-color: #3d5b6f;
+		background-color:rgb(240,240,240);
+		font-family:;
+	}
+
+	::selection
+	{
+		background:var(--main-primary-color);
+		color:white;
+	}
+
+	.nav
+	{
+		width:100%;
+		height:56px;
+		background-color:var(--main-primary-color);
+		display:block;
+		position:fixed;
+		top:0;
+		left:0;
+		z-index:1000;
+
+		transition: box-shadow 500ms;
+	}
+
+	.container
+	{
+		margin:25px 50px 50px 100px;
+		padding:25px 50px;
+		background:white;
+		border-radius:10px;
+
+		box-shadow:5px 5px 0px rgba(0,0,0,0.2);
+	}
+
+	.nav-brand
+	{
+		font-size:20px;
+		color:white;
+		margin-left:25px;
+		padding-top:12px;
+		font-weight:bold;
+		float:left;
+	}
+
+	.nav-right
+	{
+		float:right;
+		display:inline;
+		padding-top:4px;
+		padding-right:10px;
+	}
+
+	.nav-right>ul>li
+	{
+		float:right;
+		margin-right:25px;
+		font-size:15px;
+		color:white;
+		display:inline;
+	}
+
+	.btn
+	{
+		color:var(--main-primary-color) !important;
+		background-color:white !important;
+		padding: 5px 10px;
+		border-radius:5px;
+		font-weight:bold;
+		cursor:pointer;
+
+		transition:background-color 500ms, color 500ms;
+	}
+
+	.btn:hover
+	{
+		background-color:var(--main-primary-color) !important;
+		color:white !important;
+
+		transition:background-color 500ms, color 500ms;
+	}
+
+	.cc-banner
+	{
+		width:100%;
+		height:500px;
+		background-color:green;
+	}
+
+	.text
+	{
+		color:white;
+		font-size:25px;
+		font-weight:bold;
+		position:relative;
+
+		top:50%;
+	}
+
+	.scrolled-nav
+	{
+		box-shadow: 0px 5px 10px rgba(0,0,0,0.5);
+
+		transition:box-shadow 500ms;
+	}
+
+	.heading
+	{
+		font-weight:bold;
+		color:var(--main-primary-color);
+
+		text-decoration:none;
+	}
+
+	a
+	{
+		color:var(--main-primary-color);
+		text-decoration:none;
+	}
+
+	a:hover
+	{
+		color:var(--main-primary-color);
+		opacity:0.8;
+		text-decoration:none;
+	}
+
+	a:visited
+	{
+		color:var(--main-primary-color);
+		opacity:1;
+		text-decoration:none;
+	}
+
+	ul>li
+	{
+		color:var(--main-primary-color);
+		font-weight:bold;
+	}
+
+	ol>li
+	{
+		color:black;
+		font-weight:normal;
+	}
+
+	.rounded
+	{
+		background-color:var(--main-primary-color);
+		border-radius:50%;
+		color:white;
+		font-weight:bold;
+		padding:5px 10px;
+
+		margin-right:10px;
+	}
+
+	code
+	{
+
+	}
+
+	.heading-prev
+	{
+		font-weight:bold;
+		background-color:var(--main-primary-color);
+		color:white;
+		padding:4px 8px;
+		border-radius:5px;
+		margin-right:10px;
+		font-family:consolas;
+	}
+
+	.background
+	{
+		width:100%;
+		height:250px;
+		background-color:var(--main-primary-color);
+	}
+
+	.content-handle
+	{
+		background:url(res/js.jpg);
+		background-size:100%;
+		width:100px;
+		height:100px;
+
+		position:relative;
+		top:50%;
+		transform:translateY(-50%);
+	}
+
+	.fixedAbout
+	{
+		position:fixed;
+		bottom:20px;
+		right:20px;
+		background:var(--main-primary-color);
+		color:white;
+		border-radius:5px;
+		padding:5px 10px;
+
+		overflow:hidden;
+
+		box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+		transition:opacity 500ms;
+	}
+
+	.fixedAbout:hover
+	{
+		opacity:0.8;
+
+		transition:opacity 500ms;
+	}
+
+	.fixedSmall
+	{
+		margin-top:0;
+		font-size:10px;
+	}
+
+	.fixedLarge
+	{
+		font-size:13px;
+		font-weight:bold;
+	}
+
+	.textData
+	{
+		vertical-align:middle;
+		vertical-align:center;
+		padding-left:20px;
+		padding-bottom:10px;
+	}
+
+	.fixedImage
+	{
+		transform:scale(2.2);
+	}
+
+	.white-link
+	{
+		color:white;
+		text-decoration:none;
+	}
+
+	.white-link:hover
+	{
+		color:white;
+		opacity:0.7;
+		text-decoration:none;
+	}
+
+	.white-link:visited
+	{
+		color:white;
+	}
+
+	.table
+	{
+		width:100%;
+		border: solid 2px var(--main-primary-color);;
+	}
+	td
+	{
+		padding:5px;
+	}
+	th
+	{
+		background-color:var(--main-primary-color);
+		color:white;
+		padding:10px;
+	}
+
+	.round-btn
+	{
+		border-radius:50%;
+		position:fixed;
+		bottom:110px;
+		right:25px;
+		background-color:var(--main-primary-color);
+		color:white;
+		box-shadow: 0px 0px 15px rgba(0,0,0,0.5);
+		padding:18px 20px;
+
+		transition:background-color 500ms, color 1s;
+	}
+
+	.round-btn:hover
+	{
+		background-color:white;
+		color:var(--main-primary-color);
+
+		transition:background-color 500ms, color 250ms;
+	}
+
+	@media screen and (min-width:1024px)
+	{
+		.container
+		{
+			margin:25px 150px;
+			padding:25px 50px;
+			background:white;
+			border-radius:10px;
+		}
+	}
+
+	@media screen and (min-width:1800px)
+	{
+		.container
+		{
+			margin:25px 250px;
+		}
+	}
+	</style>
+
+	<!-- Place this tag in your head or just before your close body tag. -->
+	<script async defer src="https://buttons.github.io/buttons.js"></script>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+</head>
+<body>
+
+<div class="fixedAbout">
+<a href="http://www.facebook.com/c.chamandana" class="white-link">
+	<table>
+		<tr>
+			<td>
+			 	<img class="fixedImage" width="32px" src="res/me.jpg"></img>
+		 	</td>
+			<td class="textData">
+				<span class="fixedSmall">ANOTHER PROJECT BY</span>
+				<br>
+				<span class="fixedLarge">CHAMUTH CHAMANDANA</span>
+				<br>
+			</td>
+		</tr>
+	</table>
+	</a>
+</div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+<div class="nav">
+	<div class="nav-brand">
+		ccscroll.js | <span style="font-weight:normal !important">A JS Framework</span>
+	</div>
+	<div class="nav-right">
+		<ul>
+			<li><a href="#tutorial" class="btn">TUTORIAL</a></li>
+			<li><a href="#download" class="btn">DOWNLOAD</a></li>
+			<li><a href="#introduction" class="btn">INTRODUCTION</a></li>
+			<li><a href="#donate" class="btn">DONATE</a></li>
+		</ul>
+	</div>
+</div>
+
+<a href="#" class="round-btn"> <i class="fa fa-share"></i> </a> 
+
+<div class="container" style="margin-top:100px;margin-bottom:100px"> 
+	<a href="http://www.ninponix.com"><strong class="heading-prev"><</strong> <strong class="heading"> BACK TO MAIN WEBSITE</strong></a>
+
+	<div style="float:right;">
+		<a class="github-button" href="https://github.com/Ninponix/PHPDualServer/archive/master.zip" data-icon="octicon-cloud-download" data-size="large" aria-label="Download Ninponix/PHPDualServer on GitHub">Download</a>
+		<a class="github-button" href="https://github.com/Ninponix/PHPDualServer/fork" data-icon="octicon-repo-forked" data-size="large" aria-label="Fork Ninponix/PHPDualServer on GitHub">Fork</a>
+	</div>
+
+	<br><br>
+
+	<a id="introduction"></a>
+	<h1 class="heading">INTRODUCTION TO CCSCROLL.JS</h1>
+
+	<p style="text-align:justify;text-indent:50px"><strong class="heading">ccscroll.js</strong> is a open-source JavaScript framework or script file that is capable of calculating left (X) values relative to the current scrolling height of the HTML document, and it makes users' lives easier with HTML5 data tags (datasets). Using ccscroll, one can implement their own parallax scrolling without writing a single line of JavaScript code. </p>
+	
+	<br>
+	<h1 class="heading">FEATURES OF CCSCROLL.JS</h1>
+
+	<ul>
+		<li>Can be attached using data tags to elements (HTML5)</li>
+		<li>Higher FPS rate (~60 fps)</li>
+		<li>Multi-directional / Multi-destinational / Multi-starting point configurations
+			<ol>
+				<li>To Left <a href="#left" style="margin-left:10px">Click here for example</a></li>
+				<li>To Right <a href="#right" style="margin-left:10px">Click here for example</a></li>
+				<li>To Center (from left) <a href="#centerleft" style="margin-left:10px">Click here for example</a></li>
+				<li>To Center (from right) <a href="#centerright" style="margin-left:10px">Click here for example</a></li>
+			</ol>
+		</li>
+		<li>Pivoting to middle or left</li>
+		<li>Position percentage scaling factor (data-factor, 1 is default)</li>
+	</ul>
+
+	<br>
+	<a id="download"></a>
+	<h1 class="heading">DOWNLOAD CCSCROLL.JS</h1>
+
+	<br>
+	<span class="heading"><span class="rounded">1</span> Via CDN (Content Delivery Network)</span>
+	<br>
+	<br>
+	<pre><code class="html">&lt;script src="https://cdn.jsdelivr.net/gh/Chamuth/ccscrolljs@1.0/ccscroll.js"&gt;&lt;/script&gt;</code></pre>
+	
+	<br>
+	<span class="heading"><span class="rounded">2</span> Using Bower (Content Delivery Network)</span>
+	<br><br>
+
+	<pre><code class="Ini">bower install ccscroll</code></pre>
+
+	<br>
+	<a id="tutorial"></a>
+	<h1 class="heading">HOW TO USE CCSCROLL.JS</h1>
+
+	<p style="margin-bottom:0">I use this stylesheet in all of the below examples,</p>
+
+	<pre>
+		<code class="css">.background { width:100%; height:250px; background-color:var(--main-primary-color); } 
+.content-handle { background:url(res/js.jpg); background-size:100%; width:100px; height:100px; position:relative; top:50%; transform:translateY(-50%); }</code>
+	</pre>
+	
+
+	<a id="left"></a>
+	<p class="heading">From Left to Right:</p>
+	<span>The Child is moves form left to right,</span>
+
+	<pre style="margin-bottom:0 !important">
+	<code class="html">&lt;div class="background" data-scroll="parent"&gt;
+    &lt;div class="content-handle" data-scroll="child" data-to="right"&gt;&lt;/div&gt;
+&lt;/div&gt;</code>
+	</pre>
+
+	<div class="background" data-scroll="parent">
+		<div class="content-handle" data-scroll="child" data-to="right"></div>	
+	</div>
+	<a id="right"></a>
+	<p class="heading">From Right to Left:</p>
+<span>The Child is moves form right to left,</span>
+
+	<pre style="margin-bottom:0 !important">
+	<code class="html">&lt;div class="background" data-scroll="parent"&gt;
+    &lt;div class="content-handle" data-scroll="child" data-to="left"&gt;&lt;/div&gt;
+&lt;/div&gt;</code>
+	</pre>
+
+	<div class="background" data-scroll="parent">
+		<div class="content-handle" data-scroll="child" data-to="left"></div>	
+	</div>
+
+	<a id="centerleft"></a>
+	<p class="heading">From Left to Center:</p>
+
+	<span>The Child is moves to the center from left,</span>
+
+	<pre style="margin-bottom:0 !important">
+	<code class="html">&lt;div class="background" data-scroll="parent"&gt;
+    &lt;div class="content-handle" data-scroll="child" data-from="left" data-to="center"&gt;&lt;/div&gt;
+&lt;/div&gt;</code>
+	</pre>
+
+	<div class="background" data-scroll="parent">
+		<div class="content-handle" data-scroll="child" data-to="center" data-from="left"></div>
+	</div>
+
+	<a id="centerright"></a>
+	<p class="heading">From Right to Center:</p>
+
+	<span>The Child is moves to the center from right,</span>
+
+	<pre style="margin-bottom:0 !important">
+	<code class="html">&lt;div class="background" data-scroll="parent"&gt;
+    &lt;div class="content-handle" data-scroll="child" data-from="right" data-to="center"&gt;&lt;/div&gt;
+&lt;/div&gt;</code>
+	</pre>
+
+	<div class="background" data-scroll="parent">
+		<div class="content-handle" data-scroll="child" data-to="center" data-from="right"></div>
+	</div>
+
+	<br>
+
+	<p class="heading">Different Speed Factors:</p>
+
+	<span>Speed Factor is a data attribute of the child element in the scrolling context. Speed factor or <code class="html">data-factor</code> is used to change the effect on percentage reduction from the vertical scrolled percentage.</span>
+
+	<pre style="margin-bottom:0 !important">
+	<code class="html">&lt;div class="background" data-scroll="parent"&gt;
+    &lt;div class="content-handle" data-scroll="child" data-to="right" data-factor="1"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="background" data-scroll="parent"&gt;
+    &lt;div class="content-handle" data-scroll="child" data-to="right" data-factor="0.75"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="background" data-scroll="parent"&gt;
+    &lt;div class="content-handle" data-scroll="child" data-to="right" data-factor="0.5"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="background" data-scroll="parent"&gt;
+    &lt;div class="content-handle" data-scroll="child" data-to="right" data-factor="0.25"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="background" data-scroll="parent"&gt;
+    &lt;div class="content-handle" data-scroll="child" data-to="right" data-factor="0.1"&gt;&lt;/div&gt;
+&lt;/div&gt;</code>
+	</pre>
+
+	<div class="background" data-scroll="parent">
+		<div class="content-handle" data-scroll="child" data-to="right" data-factor="1"></div>
+	</div>
+
+	<div class="background" data-scroll="parent">
+		<div class="content-handle" data-scroll="child" data-to="right" data-factor="0.75"></div>
+	</div>
+
+	<div class="background" data-scroll="parent">
+		<div class="content-handle" data-scroll="child" data-to="right" data-factor="0.5"></div>
+	</div>
+
+	<div class="background" data-scroll="parent">
+		<div class="content-handle" data-scroll="child" data-to="right" data-factor="0.25"></div>
+	</div>
+
+	<div class="background" data-scroll="parent">
+		<div class="content-handle" data-scroll="child" data-to="right" data-factor="0.1"></div>
+	</div>
+
+	<br>
+
+	<p class="heading">Pivot Middle On:</p>
+
+<span>A child element calculates it's X values relative to it's pivot. In default it's the center of any element. But using the <code class="html">data-middle</code> HTML5 attribute you can make the framework calculate the X value by taking the top left of the element as the pivot point. Here's how it's done,</span>
+
+	<pre style="margin-bottom:0 !important">
+	<code class="html">&lt;div class="background" data-scroll="parent"&gt;
+    &lt;div class="content-handle" data-scroll="child" data-middle="on" data-to="right"&gt;&lt;/div&gt;
+&lt;/div&gt;</code>
+	</pre>
+
+	<div class="background" data-scroll="parent">
+		<div class="content-handle" data-scroll="child" data-to="right" data-factor="1"></div>
+	</div>
+	<br>
+	<p class="heading">Pivot Middle Off:</p>
+
+<pre style="margin-bottom:0 !important">
+	<code class="html">&lt;div class="background" data-scroll="parent"&gt;
+    &lt;div class="content-handle" data-scroll="child" data-middle="off" data-to="right"&gt;&lt;/div&gt;
+&lt;/div&gt;</code>
+	</pre>
+	<div class="background" data-scroll="parent">
+		<div class="content-handle" data-scroll="child" data-to="right" data-middle="off" data-factor="1"></div>
+	</div>
+
+	<br>
+
+	<h1 class="heading">CCSCROLL.JS REFERENCE</h1>
+	<br>
+	<span class="heading">ATTRIBUTE REFERENCE</span>
+	<br>
+	<br>
+	<table class="table">
+		<tr>
+			<th>Attribute</th>
+			<th>Description</th>
+			<th>Example</th>
+		</tr>
+
+		<tr>
+			<td><strong>data-scroll</strong></td>
+			<td>This attribute is used to identify the scrolling element and the associated parent of it.</td>
+			<td>&quot;parent&quot; and &quot;child&quot;</td>
+		</tr>
+		<tr>
+			<td><strong>data-to</strong></td>
+			<td>Represents the destination of the element scrolling.</td>
+			<td>&quot;left&quot;, &quot;right&quot; and &quot;center&quot;</td>
+		</tr>
+		<tr>
+			<td><strong>data-to</strong></td>
+			<td>Represents the starting direction of the scrolling element.</td>
+			<td>&quot;left&quot;, and &quot;right&quot;</td>
+		</tr>
+		<tr>
+			<td><strong>data-factor</strong></td>
+			<td>The reduction amount of scolling as a float percentage.</td>
+			<td>&quot;0.52&quot;, &quot;0.1&quot; or &quot;1&quot;</td>
+		</tr>
+		<tr>
+			<td><strong>data-middle</strong></td>
+			<td>States whether the element must calculate the X pivotting from center or form top left.</td>
+			<td>&quot;on&quot; or &quot;off&quot;</td>
+		</tr>
+	</table>
+
+	<br>
+	<a id="donate"></a>
+	<h1 class="heading">DONATE DEVELOPER</h1>
+
+	<table>
+		<tr>
+			<td>
+				<img style="border-radius:10px" src="res/me.jpg" width="160px"/>
+			</td>
+			<td style="padding-left:15px"> 
+				<p style="text-indent:50px">
+					<a style="font-weight:bold" href="http://www.facebook.com/c.chamandana">Chamuth Chamandana Thilakarathne</a> is a 15 year old programmer (Enterprenuer Web Designer / Developer and Software Engineer). He taught himself programming when he was 10 years old. He has worked with many projects Like Project Scholar (An e-Learning CMS), Project DualServer (A Web Design Pattern / Architecture), Project NEL (Ninponix Encryption Language), Project Ninponix Office (An Office Packaged Application), Project NVL (Ninponix Visual Language which is used in developing presentations and visual documents; CSV-type), Project Tusker (An Education-based Programming Language for school students; I believe Sri Lanka's first programming language), CC File Hidden (A file hiding software), Project Navbar (A.K.A ccnavbar.css), some small-time projects like Sound Recorders, Audio/Video Converters, Open Source Contributions and <strong class="heading">this 2-hour project for JavaSript - HTML Parallax Scrolling Implementation</strong>. 
+				</p>
+
+				Mobile: <a style="font-weight:bold;display:inline-block;margin-right:15px" href="tel:+94756281355">+94 75 6281355</a>
+				PayPal: <a style="font-weight:bold;display:inline-block;margin-right:15px" href="mailto:ninponix@gmail.com">ninponix@gmail.com</a>
+				Stripe: <a style="font-weight:bold;display:inline-block;margin-right:15px" href="mailto:ninponix@gmail.com">ninponix@gmail.com</a>
+			</td>
+		</tr>
+	</table>
+	
+</div>
+
+<script type="text/javascript" src="js/ccscroll.js"></script>
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+
+window.addEventListener("scroll", function()
+{
+	var navs = document.getElementsByClassName("nav");
+
+	for (var i = 0; i < navs.length; i++) {
+		var current = navs[i];
+
+		if (window.scrollY > 0)
+		{
+			if (!current.classList.contains("scrolled-nav"))
+			{
+				current.classList.add("scrolled-nav");
+			}
+		}else{
+			current.classList.remove("scrolled-nav");
+		}
+		
+	}
+	
+})
+
+$(document).ready(function() {
+  $('pre code').each(function(i, block) {
+    hljs.highlightBlock(block);
+  });
+});
+
+$(document).on('click', 'a', function (event){
+		event.preventDefault();
+
+	$("html, body").animate({
+		scrollTop: $( $.attr(this, 'href')).offset().top - 50
+	}, 500);
+});
+
+</script>
+
+</body>
+</html>
